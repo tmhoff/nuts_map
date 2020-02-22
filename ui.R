@@ -38,7 +38,9 @@ fluidPage(
     
   ),
   fluidRow(
-    hr()
+    hr(),
+    a("Privacy policy", href="/privacy.html"),
+    
     
   )
 )
