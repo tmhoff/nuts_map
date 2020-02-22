@@ -51,7 +51,11 @@ server <- function(input, output) {
              max_col = input$col_max)
     
   },
-  cacheKeyExpr = { list(input$col_min, input$col_max, data())} )
+  cacheKeyExpr = { list(input$col_min, input$col_max, data())},
+  sizePolicy = sizeGrowthRatio(width =
+                                 700, height = 700, growthRate = 1.4)
+  )
+  
   
 
   output$downloadPNG <- downloadHandler(
