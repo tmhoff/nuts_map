@@ -7,6 +7,8 @@ library(colourpicker)
 nuts4        <- readRDS("data/Nuts0_3.RDS")
 example_data <- readChar("data/example.txt", file.info("data/example.txt")$size)
 
+shinyOptions(cache = memoryCache(max_size = 80e6, max_age = Inf, evict = "lru"))
+
 plot_map <- function(parsed_data,
                      min_col = "#f0ff00",
                      max_col = "#ff0000"){
@@ -42,14 +44,16 @@ server <- function(input, output) {
     
   })
   
-  output$map <- renderPlot({
+  output$map <- renderCachedPlot({
     
     plot_map(parsed_data = data(),
              min_col = input$col_min,
              max_col = input$col_max)
     
-  })
+  },
+  cacheKeyExpr = { list(input$col_min, input$col_max, data())} )
   
+
   output$downloadPNG <- downloadHandler(
     
     filename = paste0(Sys.Date(), "_", "map.png"),
