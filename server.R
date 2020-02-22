@@ -11,7 +11,11 @@ shinyOptions(cache = memoryCache(max_size = 80e6, max_age = Inf, evict = "lru"))
 
 plot_map <- function(parsed_data,
                      min_col = "#f0ff00",
-                     max_col = "#ff0000"){
+                     max_col = "#ff0000",
+                     maptitle = "",
+                     maplegendtitle = "",
+                     maptitletext = 12,
+                     maplegtext = 12){
   
   mapdata  <- merge(nuts4, parsed_data, by = "nuts")
   
@@ -22,8 +26,13 @@ plot_map <- function(parsed_data,
     scale_fill_gradient(low = min_col, high = max_col) +
     theme_minimal() + 
     theme(axis.text=element_blank(), panel.grid.major = element_blank(), 
-          plot.title = element_text(hjust = 0.5)) +
-    theme(legend.position = "none")
+          plot.title = element_text(hjust = 0.5)) + 
+    ggtitle(maptitle) + 
+    theme(plot.title = element_text(size = maptitletext), 
+          legend.title = element_text(size = maplegtext))
+  
+  if (maplegendtitle == "") m <- m + theme(legend.position = "none")
+  if (maplegendtitle != "") m <- m + guides(fill = guide_legend(title = maplegendtitle))
   
   m
   
@@ -46,12 +55,17 @@ server <- function(input, output) {
   
   output$map <- renderCachedPlot({
     
-    plot_map(parsed_data = data(),
-             min_col = input$col_min,
-             max_col = input$col_max)
+    plot_map(parsed_data    = data(),
+             min_col        = input$col_min,
+             max_col        = input$col_max,
+             maptitle       = input$title,
+             maplegendtitle = input$legtitle,
+             maptitletext   = input$titletext,
+             maplegtext     = input$legtext)
     
   },
-  cacheKeyExpr = { list(input$col_min, input$col_max, data())},
+  cacheKeyExpr = { list(input$col_min, input$col_max, data(), input$title, input$legtitle,
+                        input$titletext, input$legtext)},
   sizePolicy = sizeGrowthRatio(width =
                                  700, height = 700, growthRate = 1.4)
   )
