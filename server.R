@@ -22,7 +22,10 @@ plot_map <- function(parsed_data,
                      maptitlefont = "Ubuntu",
                      maplegfont = "Ubuntu",
                      maplegfontsize = 12,
-                     mapshowlegend = FALSE){
+                     mapshowlegend = FALSE,
+                     maplabel = FALSE,
+                     mapaxislines = FALSE,
+                     mapgrid = FALSE){
   
   mapdata  <- merge(nuts4, parsed_data, by = "nuts")
   
@@ -42,6 +45,9 @@ plot_map <- function(parsed_data,
   if (maplegendtitle == "" & (!mapshowlegend)) m <- m + theme(legend.position = "none")
   if (maplegendtitle != "") m <- m + guides(fill = guide_legend(title = maplegendtitle))
   if (mapshowlegend)        m <- m + guides(fill = guide_legend(title = ""))
+  if (maplabel)             m <- m + theme(axis.text=element_text())
+  if (mapaxislines)         m <- m + theme(axis.line=element_line())
+  if (mapgrid)              m <- m + theme(panel.grid.major=element_line())
   
   m
   
@@ -53,11 +59,11 @@ server <- function(input, output) {
   data <- reactiveVal()
   
   observeEvent(input$data_raw, {
-    parsed <- read.csv(text = input$data_raw, 
-                       header = TRUE,
-                       check.names = FALSE,
-                       stringsAsFactors = FALSE,
-                       quote = "\'")
+    parsed <- read.table(text = input$data_raw, 
+                         header = TRUE,
+                         check.names = FALSE,
+                         stringsAsFactors = FALSE,
+                         quote = "\'")
     data(parsed)
     
   })
@@ -74,12 +80,16 @@ server <- function(input, output) {
              maptitlefont   = input$titlefont,
              maplegfont     = input$legfont,
              maplegfontsize = input$legtextsize,
-             mapshowlegend  = input$showlegend)
+             mapshowlegend  = input$showlegend,
+             maplabel       = input$axislabel,
+             mapaxislines   = input$axislines,
+             mapgrid        = input$grid)
     
   },
   cacheKeyExpr = { list(input$col_min, input$col_max, data(), input$title, input$legtitle,
                         input$titletext, input$legtext, input$titlefont, input$legfont,
-                        input$legtextsize, input$showlegend)},
+                        input$legtextsize, input$showlegend, input$axislabel, input$axislines,
+                        input$grid)},
   sizePolicy = sizeGrowthRatio(width =
                                  700, height = 700, growthRate = 1.4)
   )

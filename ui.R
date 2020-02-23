@@ -4,9 +4,9 @@ example_data <- readChar("data/example.txt", file.info("data/example.txt")$size)
 
 fluidPage(
   tags$head(
-    tags$meta(charset="UTF-8"),
-    tags$meta(name="description", content="Online map generator to generate statistics maps using NUTS classification."),
-    tags$meta(name="keywords", content="generator, map, NUTS, NUTS 1, NUTS 2, NUTS 3, svg, map, europe, countries, statistics")
+    tags$meta(charset = "UTF-8"),
+    tags$meta(name    ="description", content = "Online map generator to generate statistics maps using NUTS classification."),
+    tags$meta(name    ="keywords",    content = "generator, map, NUTS, NUTS 1, NUTS 2, NUTS 3, svg, map, europe, countries, statistics")
   ), 
   titlePanel("NUTS map generator"),
   hr(),
@@ -20,8 +20,8 @@ fluidPage(
     
            hr(),
            textAreaInput(inputId = "data_raw",
-                         label = "paste raw data here:",
-                         value = example_data, width = '100%', height = '550px')),
+                         label   = "paste raw data here:",
+                         value   = example_data, width = '100%', height = '550px')),
     column(7,
            plotOutput(outputId = "map", height = '750px', width = '100%')
     )
@@ -42,7 +42,7 @@ fluidPage(
            downloadButton('downloadPNG', 'download PNG'),
            downloadButton('downloadSVG', 'download SVG')),
     column(2,
-           h5("A similar map generator for maps of germany (PLZ, AGS) can be found here:"),
+           h5("A similar map generator for maps of Germany (PLZ, AGS) can be found here:"),
            a("https://karte-plz.de",
              href   = "https://karte-plz.de",
              target = "_blank")),
@@ -57,7 +57,7 @@ fluidPage(
       column(2,
              textInput(inputId = "title",    label = "maptitle:",        value = ""),
              textInput(inputId = "legtitle", label = "title of legend:", value = ""),
-             checkboxInput("showlegend", "show legend without title")
+             checkboxInput(inputId = "showlegend", label = "show legend without title")
              
       ),
       column(2,
@@ -69,7 +69,11 @@ fluidPage(
       column(2,
              selectInput(inputId = "titlefont", label = "title font:",  choices = extrafont::fonts()),
              selectInput(inputId = "legfont",   label = "legend font:", choices = extrafont::fonts())),
-      column(3),
+      column(3,
+             checkboxInput(inputId = "axislabel", label = "axis labels"),
+             checkboxInput(inputId = "axislines", label = "axis lines"),
+             checkboxInput(inputId = "grid", label = "grid lines")
+      ),
       column(2)
       
     )
