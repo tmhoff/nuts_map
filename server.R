@@ -21,7 +21,8 @@ plot_map <- function(parsed_data,
                      maplegtext = 12,
                      maptitlefont = "Ubuntu",
                      maplegfont = "Ubuntu",
-                     maplegfontsize = 12){
+                     maplegfontsize = 12,
+                     mapshowlegend = FALSE){
   
   mapdata  <- merge(nuts4, parsed_data, by = "nuts")
   
@@ -38,8 +39,9 @@ plot_map <- function(parsed_data,
           legend.title = element_text(size = maplegtext,     family = maplegfont), 
           legend.text  = element_text(size = maplegfontsize, family = maplegfont))
 
-  if (maplegendtitle == "") m <- m + theme(legend.position = "none")
+  if (maplegendtitle == "" & (!mapshowlegend)) m <- m + theme(legend.position = "none")
   if (maplegendtitle != "") m <- m + guides(fill = guide_legend(title = maplegendtitle))
+  if (mapshowlegend)        m <- m + guides(fill = guide_legend(title = ""))
   
   m
   
@@ -71,11 +73,13 @@ server <- function(input, output) {
              maplegtext     = input$legtext,
              maptitlefont   = input$titlefont,
              maplegfont     = input$legfont,
-             maplegfontsize = input$legtextsize)
+             maplegfontsize = input$legtextsize,
+             mapshowlegend  = input$showlegend)
     
   },
   cacheKeyExpr = { list(input$col_min, input$col_max, data(), input$title, input$legtitle,
-                        input$titletext, input$legtext, input$titlefont, input$legfont, input$legtextsize)},
+                        input$titletext, input$legtext, input$titlefont, input$legfont,
+                        input$legtextsize, input$showlegend)},
   sizePolicy = sizeGrowthRatio(width =
                                  700, height = 700, growthRate = 1.4)
   )

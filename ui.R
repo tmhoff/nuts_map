@@ -47,7 +47,8 @@ fluidPage(
       column(1),
       column(2,
              textInput(inputId = "title",    label = "maptitle:",        value = ""),
-             textInput(inputId = "legtitle", label = "title of legend:", value = "")
+             textInput(inputId = "legtitle", label = "title of legend:", value = ""),
+             checkboxInput("showlegend", "show legend without title")
              
       ),
       column(2,
