@@ -8,18 +8,22 @@ fluidPage(
     tags$meta(name="description", content="Online map generator to generate statistics maps using NUTS classification."),
     tags$meta(name="keywords", content="generator, map, NUTS, NUTS 1, NUTS 2, NUTS 3, svg, map, europe, countries, statistics")
   ), 
-  titlePanel("Nuts map generator"),
+  titlePanel("NUTS map generator"),
   hr(),
   fluidRow(
     column(1),
     column(4,
-           h5("Map generator for data using NUTS classification"),
+           h5("Map generator for data using NUTS classification. This classification is further described here:"),
+           a("Nomenclature des unités territoriales statistiques",
+             href   = "https://en.wikipedia.org/wiki/Nomenclature_of_Territorial_Units_for_Statistics",
+             target = "_blank"),
+    
            hr(),
            textAreaInput(inputId = "data_raw",
                          label = "paste raw data here:",
-                         value = example_data, width = '100%', height = '350px')),
+                         value = example_data, width = '100%', height = '550px')),
     column(7,
-           plotOutput(outputId = "map")
+           plotOutput(outputId = "map", height = '750px', width = '100%')
     )
   ),
   
@@ -34,10 +38,15 @@ fluidPage(
     column(2,
            colourInput("col_max", "color for max value", value = "#ff0000")
     ),
-    column(3,
+    column(2,
            downloadButton('downloadPNG', 'download PNG'),
            downloadButton('downloadSVG', 'download SVG')),
-    column(2)
+    column(2,
+           h5("A similar map generator for maps of germany (PLZ, AGS) can be found here:"),
+           a("https://karte-plz.de",
+             href   = "https://karte-plz.de",
+             target = "_blank")),
+    column(1)
     
   ),
   conditionalPanel(

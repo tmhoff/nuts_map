@@ -83,8 +83,6 @@ server <- function(input, output) {
   sizePolicy = sizeGrowthRatio(width =
                                  700, height = 700, growthRate = 1.4)
   )
-  
-  
 
   output$downloadPNG <- downloadHandler(
     
