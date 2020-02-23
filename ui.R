@@ -6,7 +6,7 @@ fluidPage(
   tags$head(
     tags$meta(charset="UTF-8"),
     tags$meta(name="description", content="Online map generator to generate statistics maps using NUTS classification."),
-    tags$meta(name="keywords", content="generator, map, NUTS, NUTS 1, NUTS 2, NUTS 3, svg, map, europe, countries, statistics"),
+    tags$meta(name="keywords", content="generator, map, NUTS, NUTS 1, NUTS 2, NUTS 3, svg, map, europe, countries, statistics")
   ), 
   titlePanel("Nuts map generator"),
   hr(),
@@ -19,7 +19,7 @@ fluidPage(
                          label = "paste raw data here:",
                          value = example_data, width = '100%', height = '350px')),
     column(7,
-           plotOutput(outputId = "map"),
+           plotOutput(outputId = "map")
     )
   ),
   
@@ -46,15 +46,19 @@ fluidPage(
       hr(),
       column(1),
       column(2,
-             textInput(inputId = "title", label = "maptitle:", value = ""),
+             textInput(inputId = "title",    label = "maptitle:",        value = ""),
              textInput(inputId = "legtitle", label = "title of legend:", value = "")
              
       ),
       column(2,
-             numericInput(inputId = "titletext", label = "fontsize title:", min = 6, max = 50, value = 12),
-             numericInput(inputId = "legtext", label = "fontsize legend:", min = 6, max = 50, value = 12)
+             numericInput(inputId = "titletext",   label = "fontsize title:",        min = 6, max = 50, value = 12),
+             numericInput(inputId = "legtext",     label = "fontsize legend title:", min = 6, max = 50, value = 12),
+             numericInput(inputId = "legtextsize", label = "fontsize legend text:",  min = 6, max = 50, value = 12)
+             
       ),
-      column(2),
+      column(2,
+             selectInput(inputId = "titlefont", label = "title font:",  choices = extrafont::fonts()),
+             selectInput(inputId = "legfont",   label = "legend font:", choices = extrafont::fonts())),
       column(3),
       column(2)
       
@@ -62,7 +66,7 @@ fluidPage(
   ),
   fluidRow(
     hr(),
-    a("Privacy policy", href="/privacy.html"),
+    a("Privacy policy", href="/privacy.html")
     
     
   )

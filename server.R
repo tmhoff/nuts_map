@@ -3,6 +3,9 @@ library(dplyr)
 library(ggplot2)
 library(shiny)
 library(colourpicker)
+library(extrafont)
+
+# extrafont::font_import(prompt = FALSE)
 
 nuts4        <- readRDS("data/Nuts0_3.RDS")
 example_data <- readChar("data/example.txt", file.info("data/example.txt")$size)
@@ -15,7 +18,10 @@ plot_map <- function(parsed_data,
                      maptitle = "",
                      maplegendtitle = "",
                      maptitletext = 12,
-                     maplegtext = 12){
+                     maplegtext = 12,
+                     maptitlefont = "Ubuntu",
+                     maplegfont = "Ubuntu",
+                     maplegfontsize = 12){
   
   mapdata  <- merge(nuts4, parsed_data, by = "nuts")
   
@@ -28,9 +34,10 @@ plot_map <- function(parsed_data,
     theme(axis.text=element_blank(), panel.grid.major = element_blank(), 
           plot.title = element_text(hjust = 0.5)) + 
     ggtitle(maptitle) + 
-    theme(plot.title = element_text(size = maptitletext), 
-          legend.title = element_text(size = maplegtext))
-  
+    theme(plot.title   = element_text(size = maptitletext,   family = maptitlefont), 
+          legend.title = element_text(size = maplegtext,     family = maplegfont), 
+          legend.text  = element_text(size = maplegfontsize, family = maplegfont))
+
   if (maplegendtitle == "") m <- m + theme(legend.position = "none")
   if (maplegendtitle != "") m <- m + guides(fill = guide_legend(title = maplegendtitle))
   
@@ -61,11 +68,14 @@ server <- function(input, output) {
              maptitle       = input$title,
              maplegendtitle = input$legtitle,
              maptitletext   = input$titletext,
-             maplegtext     = input$legtext)
+             maplegtext     = input$legtext,
+             maptitlefont   = input$titlefont,
+             maplegfont     = input$legfont,
+             maplegfontsize = input$legtextsize)
     
   },
   cacheKeyExpr = { list(input$col_min, input$col_max, data(), input$title, input$legtitle,
-                        input$titletext, input$legtext)},
+                        input$titletext, input$legtext, input$titlefont, input$legfont, input$legtextsize)},
   sizePolicy = sizeGrowthRatio(width =
                                  700, height = 700, growthRate = 1.4)
   )
