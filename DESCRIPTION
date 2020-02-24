@@ -1,0 +1,9 @@
+Imports:
+  shiny,
+  shinytest,
+  sf,
+  dplyr,
+  ggplot2,
+  colourpicker,
+  extrafont,
+  testthat

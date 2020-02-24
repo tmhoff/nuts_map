@@ -19,12 +19,8 @@ before_install:
 cache: 
   packages: true
 directories: 
-  - packrat/lib
   - travis_phantomjs
 dist: bionic
-install: 
-  - "R -e 'if (system.file(package=\"packrat\") == \"\") install.packages(\"packrat\")'"
-  - "R -e \"packrat::packify(); packrat::restore()\""
 language: R
 r: "3.6.2"
 sudo: false

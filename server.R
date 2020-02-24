@@ -6,7 +6,6 @@ library(colourpicker)
 library(extrafont)
 library(shinytest)
 library(testthat)
-library(packrat)
 
 # extrafont::font_import(prompt = FALSE)
 
