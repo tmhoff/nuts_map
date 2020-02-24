@@ -23,5 +23,14 @@ directories:
 dist: bionic
 language: R
 r: "3.6.2"
+r_packages:
+    - shiny
+    - shinytest
+    - sf
+    - dplyr
+    - ggplot2
+    - colourpicker
+    - extrafont
+    - testthat
 sudo: false
 warnings_are_errors: false
