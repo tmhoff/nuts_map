@@ -1,4 +1,4 @@
-dist: bionic   # Use Ubuntu 18.04 image
+dist: bionic
 language: r
 sudo: false
 r: 3.6.2
