@@ -32,5 +32,7 @@ r_packages:
     - colourpicker
     - extrafont
     - testthat
+script:
+  - R -f run_tests.R
 sudo: false
 warnings_are_errors: false
