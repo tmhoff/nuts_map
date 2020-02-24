@@ -4,6 +4,7 @@ library(ggplot2)
 library(shiny)
 library(colourpicker)
 library(extrafont)
+library(shinytest)
 
 # extrafont::font_import(prompt = FALSE)
 

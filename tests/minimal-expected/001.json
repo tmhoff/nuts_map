@@ -1,0 +1,66 @@
+{
+  "input": {
+    "additional": false,
+    "axislabel": false,
+    "axislines": false,
+    "col_max": "#FF0000",
+    "col_min": "#F0FF00",
+    "data_raw": "nuts\tvalue\t\nNO011\t1\nNO012\t2.5\nNO021\t3\nNO022\t4\nNO031\t5\nNO032\t1\nNO033\t2\nNO034\t3\nNO041\t4\nNO042\t5\nNO043\t1\nNO051\t2\nNO052\t3\nNO053\t4\nNO060\t5\nNO071\t1\nNO072\t2\nNO073\t3\nFI193\t3\nFI194\t4\nFI195\t5\nFI196\t6\nFI197\t7\nFI1B1\t3\nFI1C1\t4\nFI1C2\t5\nFI1C3\t6\nFI1C4\t7\nFI1C5\t3\nFI1D1\t4\nFI1D2\t5\nFI1D3\t6\nFI1D5\t7\nFI1D7\t3\nFI1D8\t4\nFI1D9\t5\nFI200\t5\nSE110\t6\nSE121\t7\nSE122\t8\nSE123\t9\nSE124\t5\nSE125\t6\nSE211\t7\nSE212\t8\nSE213\t9\nSE214\t5\nSE311\t6\nSE312\t7\nSE313\t8\nSE321\t9\nSE322\t5\nSE331\t6\nSE332\t7\n",
+    "grid": false,
+    "legfont": "",
+    "legtext": 12,
+    "legtextsize": 12,
+    "legtitle": "",
+    "showlegend": false,
+    "title": "",
+    "titlefont": "",
+    "titletext": 12
+  },
+  "output": {
+    "map": {
+      "src": "[image data sha1: 91fb6c16d7ea87e57688b73073b6f45541908b2c]",
+      "coordmap": {
+        "panels": [
+          {
+            "panel": 1,
+            "row": 1,
+            "col": 1,
+            "panel_vars": {
+
+            },
+            "log": {
+              "x": null,
+              "y": null
+            },
+            "domain": {
+              "left": 3.14928,
+              "right": 32.94014,
+              "bottom": 55.447243,
+              "top": 71.933537
+            },
+            "mapping": {
+              "x": null,
+              "y": null,
+              "fill": "value",
+              "geometry": "geometry"
+            },
+            "range": {
+              "left": 8.21917808219178,
+              "right": 694.520547945206,
+              "bottom": 925.823666822077,
+              "top": 68.9160592053207
+            }
+          }
+        ],
+        "dims": {
+          "width": 700,
+          "height": 980
+        }
+      },
+      "class": "shiny-scalable"
+    }
+  },
+  "export": {
+
+  }
+}
