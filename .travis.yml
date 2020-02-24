@@ -1,4 +1,8 @@
 --- 
+addons: 
+  apt: 
+    packages: 
+      - libudunits2-dev
 before_install: 
   - "export PHANTOMJS_VERSION=2.1.1"
   - "phantomjs --version"
